@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Companion</title>
+    <link rel="stylesheet" href="2CSS.css">
+</head>
+<body>
+    <header>
+        <h1 class="he1">Health Companion</h1>
+        <p>Track your food intake and calculate the calories required per day.</p>
+    </header>
+
+    <div class="container">
+        <h1>Calorie Calculator</h1>
+        <form id="calorie">
+          <label for="age">Age (years):</label>
+          <input type="number" id="age" required>
+    
+          <label for="weight">Weight (kg):</label>
+          <input type="number" id="weight" required>
+    
+          <label for="height">Height (cm):</label>
+          <input type="number" id="height" required>
+    
+          <label for="gender">Gender:</label>
+          <select id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+    
+          <label for="activity">Activity Level:</label>
+          <select id="activity">
+            <option value="1.2">Sedentary (little or no exercise)</option>
+            <option value="1.375">Lightly active (light exercise/sports 1-3 days/week)</option>
+            <option value="1.55">Moderately active (moderate exercise/sports 3-5 days/week)</option>
+            <option value="1.725">Very active (hard exercise/sports 6-7 days a week)</option>
+            <option value="1.9">Super active (very hard exercise/sports & physical job)</option>
+          </select>
+    
+          <button type="submit">Calculate</button>
+        </form>
+    
+        <h2>Daily Calorie Requirement: <span id="answer">0</span> kcal</h2>
+      </div>
+
+      <div class="container">
+        <h1>Track Your Calories</h1>
+
+        <!-- Search Box -->
+        <input type="text" id="food-search" placeholder="Search for food items...">
+        <button onclick="searchFood()">Search</button>
+
+        <form id="calorie-form">
+            <label for="food-select">Select Food:</label>
+            <select id="food-select" required>
+                <option value="">-- Select --</option>
+                <!-- Food options will be populated by JavaScript -->
+            </select>
+
+            <label for="quantity">Quantity (grams):</label>
+            <input type="number" id="quantity" required min="1">
+
+            <button type="button" onclick="addFood()">Add Food</button>
+            <button type="button" onclick="stopAdding()">Stop</button>
+        </form>
+
+        <div id="selected-foods">
+            <h2>Selected Foods:</h2>
+            <ul id="food-list"></ul>
+        </div>
+
+        <div id="result" style="display: none;">
+            <h2>Total Calories: <span id="total-calories"></span></h2>
+        </div>
+    </div>
+    
+    <script src="3JS.js"></script>
+</body>
+</html>
+
