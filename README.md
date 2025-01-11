@@ -1,2 +1,2 @@
 # hackstreet_boys
-this is my first 
+this is our first hackathon
