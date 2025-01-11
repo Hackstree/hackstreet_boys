@@ -103,10 +103,8 @@ const foods = [
   let selectedFoods = [];
   let totalCalories = 0;
   
-  // Populate the food selection dropdown
   const foodSelect = document.getElementById('food-select');
   
-  // Function to render the food options in the dropdown
   function renderFoodList(filteredFoods = foods) {
       foodSelect.innerHTML = '<option value="">-- Select --</option>'; // Clear previous options
       filteredFoods.forEach(food => {
@@ -117,53 +115,43 @@ const foods = [
       });
   }
   
-  // Initialize the dropdown with all food items
   renderFoodList();
   
-  // Form submission event listener
   document.getElementById('calorie-form').addEventListener('submit', function(event) {
       event.preventDefault();
-      // Prevent the page from reloading if submit is clicked by mistake
+    
   });
   
-  // Add food to selected list
   function addFood() {
       const foodId = foodSelect.value;
       const quantity = document.getElementById('quantity').value;
   
-      // Validate input
       if (!foodId || !quantity) {
           alert('Please select a food and enter the quantity.');
           return;
       }
   
-      // Find selected food from the array
       const selectedFood = foods.find(food => food.id === foodId);
   
       if (selectedFood) {
-          // Calculate calories based on the food's calories per 100g and the entered quantity
+
           const calories = (selectedFood.calories_per_100g * quantity) / 100;
           totalCalories += calories;
   
-          // Add the selected food and quantity to the selectedFoods array
           selectedFoods.push({ name: selectedFood.name, quantity: quantity, calories: calories });
   
-          // Render the selected foods list and update the total calories
           renderSelectedFoods();
       }
   }
   
-  // Stop adding foods and finalize the selection process
   function stopAdding() {
       document.getElementById('result').style.display = 'block';
       document.getElementById('total-calories').textContent = totalCalories.toFixed(2);
-      // Disable the input fields and buttons to stop further input
       document.getElementById('food-select').disabled = true;
       document.getElementById('quantity').disabled = true;
       document.querySelector('button[type="button"]').disabled = true;
   }
   
-  // Render the list of selected foods
   function renderSelectedFoods() {
       const foodList = document.getElementById('food-list');
       foodList.innerHTML = '';
@@ -175,7 +163,6 @@ const foods = [
       });
   }
   
-  // Search functionality
   function searchFood() {
       const searchQuery = document.getElementById('food-search').value.toLowerCase();
       const filteredFoods = foods.filter(food => food.name.toLowerCase().includes(searchQuery));
@@ -186,14 +173,13 @@ const foods = [
   document.getElementById('calorie').addEventListener('submit', function(e) {
     e.preventDefault();
   
-    // Get input values
     const age = parseInt(document.getElementById('age').value);
     const weight = parseInt(document.getElementById('weight').value);
     const height = parseInt(document.getElementById('height').value);
     const gender = document.getElementById('gender').value;
     const activity = parseFloat(document.getElementById('activity').value);
   
-    // Calculate BMR (Basal Metabolic Rate) using Mifflin-St Jeor Equation
+   
     let bmr;
     if (gender === 'male') {
       bmr = 10 * weight + 6.25 * height - 5 * age + 5;
@@ -201,13 +187,10 @@ const foods = [
       bmr = 10 * weight + 6.25 * height - 5 * age - 161;
     }
   
-    // Calculate Total Daily Energy Expenditure (TDEE)
     const tdee = bmr * activity;
   
-    // Display the result
     document.getElementById('answer').textContent = Math.round(tdee);
   
-    // Send browser notification
     if (Notification.permission === 'granted') {
       new Notification('Your Daily Calorie Requirement is ' + Math.round(tdee) + ' kcal');
     } else {
